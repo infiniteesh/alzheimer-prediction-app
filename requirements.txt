@@ -1,0 +1,6 @@
+hugchat
+joblib
+pandas
+Requests
+streamlit
+scikit-learn
