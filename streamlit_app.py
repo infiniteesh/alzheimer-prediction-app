@@ -1,5 +1,6 @@
 import base64
 import streamlit as st
+st.legacy_caching.clear_cache()
 from config import *
 from streamlit_pages._home_page import home_page
 from streamlit_pages._predict_alzheimer import prediction_page
