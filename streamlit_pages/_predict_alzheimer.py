@@ -1,8 +1,18 @@
 import time
 import joblib
 import pandas as pd
-from config import *
 import streamlit as st
+from config import (
+    PTRACCAT_CATEGORIES,
+    APOE_CATEGORIES,
+    PTHETHCAT_CATEGORIES,
+    APOE4_CATEGORIES,
+    PTGENDER_CATEGORIES,
+    IMPUTED_CATEGORIES,
+    ABBREVIATION,
+    CONDITION_DESCRIPTION,
+    DEMENTIA_IMPLICATION
+)
 
 def prediction_page():
     def convert_to_one_hot(selected_category, all_categories):
@@ -13,7 +23,6 @@ def prediction_page():
     def predict_alzheimer(input_data):
         loaded_model = joblib.load('model/alzheimer_model.pkl')
         predictions = loaded_model.predict(input_data)
-
         return predictions
 
     st.title("Patient Information")
