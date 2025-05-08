@@ -1,5 +1,5 @@
 import streamlit as st
-from config import TEAM_MEMBERS, DEFAULT_IMAGE
+from config import TEAM_MEMBERS
 
 def team_members():
     # Define centralized CSS for styling
@@ -11,7 +11,6 @@ def team_members():
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            height: 350px; /* Fixed height to ensure equal size */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -20,13 +19,6 @@ def team_members():
         .team-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        .team-image-wrapper {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 10px auto;
         }
         .team-name {
             color: #ffffff;
@@ -76,13 +68,6 @@ def team_members():
     col1, col2 = st.columns(2)
     with col1:
         st.markdown('<div class="team-card">', unsafe_allow_html=True)
-        st.markdown('<div class="team-image-wrapper">', unsafe_allow_html=True)
-        try:
-            st.image(TEAM_MEMBERS[0]['image'], width=120, caption="", clamp=True, output_format="JPEG")
-        except Exception as e:
-            st.warning(f"Failed to load image for {TEAM_MEMBERS[0]['name']}: {str(e)}")
-            st.image(DEFAULT_IMAGE, width=120, caption="Default Image", clamp=True, output_format="JPEG")
-        st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(
             f"""
             <h3 class="team-name">{TEAM_MEMBERS[0]['name']}</h3>
@@ -98,13 +83,6 @@ def team_members():
 
     with col2:
         st.markdown('<div class="team-card">', unsafe_allow_html=True)
-        st.markdown('<div class="team-image-wrapper">', unsafe_allow_html=True)
-        try:
-            st.image(TEAM_MEMBERS[1]['image'], width=120, caption="", clamp=True, output_format="JPEG")
-        except Exception as e:
-            st.warning(f"Failed to load image for {TEAM_MEMBERS[1]['name']}: {str(e)}")
-            st.image(DEFAULT_IMAGE, width=120, caption="Default Image", clamp=True, output_format="JPEG")
-        st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(
             f"""
             <h3 class="team-name">{TEAM_MEMBERS[1]['name']}</h3>
@@ -122,13 +100,6 @@ def team_members():
     col3, col4 = st.columns(2)
     with col3:
         st.markdown('<div class="team-card">', unsafe_allow_html=True)
-        st.markdown('<div class="team-image-wrapper">', unsafe_allow_html=True)
-        try:
-            st.image(TEAM_MEMBERS[2]['image'], width=120, caption="", clamp=True, output_format="JPEG")
-        except Exception as e:
-            st.warning(f"Failed to load image for {TEAM_MEMBERS[2]['name']}: {str(e)}")
-            st.image(DEFAULT_IMAGE, width=120, caption="Default Image", clamp=True, output_format="JPEG")
-        st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(
             f"""
             <h3 class="team-name">{TEAM_MEMBERS[2]['name']}</h3>
@@ -144,13 +115,6 @@ def team_members():
 
     with col4:
         st.markdown('<div class="team-card">', unsafe_allow_html=True)
-        st.markdown('<div class="team-image-wrapper">', unsafe_allow_html=True)
-        try:
-            st.image(TEAM_MEMBERS[3]['image'], width=120, caption="", clamp=True, output_format="JPEG")
-        except Exception as e:
-            st.warning(f"Failed to load image for {TEAM_MEMBERS[3]['name']}: {str(e)}")
-            st.image(DEFAULT_IMAGE, width=120, caption="Default Image", clamp=True, output_format="JPEG")
-        st.markdown('</div>', unsafe_allow_html=True)
         st.markdown(
             f"""
             <h3 class="team-name">{TEAM_MEMBERS[3]['name']}</h3>
