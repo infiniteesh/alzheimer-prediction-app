@@ -5,17 +5,16 @@ from config import BASE_PROMPT, GEMINI_API_KEY
 # Configure Gemini API
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Create model and chat object once
-if "chat" not in st.session_state:
-    model = genai.GenerativeModel(model_name="models/gemini-1.5-flash-latest")
-    st.session_state.chat = model.start_chat(history=[])
-
 def chat_bot():
     # Initialize session state variables
-    if "base_prompt_added" not in st.session_state:
-        st.session_state.base_prompt_added = False
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": "Hi! How may I help you?"}]
+    if "chat" not in st.session_state:
+        model = genai.GenerativeModel(
+            model_name="models/gemini-1.5-flash-latest",
+            system_instruction=BASE_PROMPT
+        )
+        st.session_state.chat = model.start_chat(history=[])
 
     # Display previous messages
     for message in st.session_state.messages:
@@ -27,11 +26,6 @@ def chat_bot():
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.write(prompt)
-
-        # Prepend base prompt only once at the beginning
-        if not st.session_state.base_prompt_added:
-            prompt = BASE_PROMPT + "\n" + prompt
-            st.session_state.base_prompt_added = True
 
         # Generate assistant response
         with st.chat_message("assistant"):
