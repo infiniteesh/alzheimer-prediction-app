@@ -2,6 +2,7 @@ import time
 import joblib
 import pandas as pd
 import streamlit as st
+from sklearn.metrics import accuracy_score
 from config import (
     PTRACCAT_CATEGORIES,
     APOE_CATEGORIES,
@@ -24,6 +25,28 @@ def prediction_page():
         loaded_model = joblib.load('model/alzheimer_model.pkl')
         predictions = loaded_model.predict(input_data)
         return predictions
+
+    # Function to evaluate model accuracy
+    def evaluate_model():
+        # Load test dataset
+        try:
+            test_data = pd.read_csv("data/test_data.csv")
+            X_test = test_data.drop(columns=["DX.bl"])  # Features (using DX.bl as the label column)
+            y_test = test_data["DX.bl"]  # True labels
+        except Exception as e:
+            st.error(f"Failed to load test data: {str(e)}")
+            return
+
+        # Make predictions on the test set
+        y_pred = predict_alzheimer(X_test)
+
+        # Calculate accuracy
+        accuracy = accuracy_score(y_test, y_pred)
+
+        # Display accuracy
+        st.subheader("Model Evaluation")
+        st.write(f"**Accuracy**: {accuracy * 100:.2f}%")
+        st.write(f"Based on a test set of {len(X_test)} samples.")
 
     st.title("Patient Information")
 
@@ -48,7 +71,12 @@ def prediction_page():
     mmse = st.number_input("MMSE Score", min_value=0, max_value=30, step=1)
 
     st.write("<br>", unsafe_allow_html=True)
-    predict_button = st.button("Predict")
+    # Add two buttons side by side
+    col1, col2 = st.columns(2)
+    with col1:
+        predict_button = st.button("Predict")
+    with col2:
+        evaluate_button = st.button("Evaluate Model")  # New button for evaluation
     st.write("")
 
     loading_bar = st.empty()
@@ -88,3 +116,7 @@ def prediction_page():
         # Add disclaimer
         st.write("")
         st.write("**Note**: This prediction is based on machine learning and should not be considered a medical diagnosis. Please consult a healthcare professional for an accurate assessment.", unsafe_allow_html=True)
+
+    # Evaluate model if the button is clicked
+    if evaluate_button:
+        evaluate_model()

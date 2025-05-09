@@ -10,12 +10,10 @@ if "chat" not in st.session_state:
     model = genai.GenerativeModel(model_name="models/gemini-1.5-flash-latest")
     st.session_state.chat = model.start_chat(history=[])
 
-# Flag to prepend BASE_PROMPT only once
-if "base_prompt_added" not in st.session_state:
-    st.session_state.base_prompt_added = False
-
 def chat_bot():
-    # Initialize message history
+    # Initialize session state variables
+    if "base_prompt_added" not in st.session_state:
+        st.session_state.base_prompt_added = False
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": "Hi! How may I help you?"}]
 
