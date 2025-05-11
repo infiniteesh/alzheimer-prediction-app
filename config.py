@@ -42,11 +42,11 @@ DEMENTIA_IMPLICATION = {
 }
 
 # NEWS PAGE
-NEWS_API_KEY = "9c26cb930eef4299b496cb4e13d746d8"
+NEWS_API_KEY = ""
 # KEYWORD = "alzheimer"
 
 # CHATBOT PAGE
-GEMINI_API_KEY = "AIzaSyB_CZbXVv6ESIbMHI1LCI-CTnucggNS4ps"
+GEMINI_API_KEY = ""
 BASE_PROMPT = "You are an empathetic and knowledgeable virtual assistant helping users understand their Alzheimer's disease risk predictions. Provide clear explanations about Alzheimer's symptoms, stages, and risk factors using simple language. Avoid giving medical diagnoses or treatment advice. Always remind users to consult a healthcare professional for medical concerns. Be supportive, non-judgmental, and informative."
 # or your actual prompt
 
